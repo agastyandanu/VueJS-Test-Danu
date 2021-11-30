@@ -11,7 +11,7 @@
             <div class="row mt-5">
                 <div class="col">
                     <div class="input-group mb-3">
-                        <input v-model="searchKey" type="text" class="form-control" placeholder="Search Menu" @keyup="searchMovie">
+                        <input v-model="searchKey" type="text" class="form-control" placeholder="Search Movies" @keyup="searchMovie">
                         <div class="input-group-append">
                             <span class="input-group-text" id="basic-addon2"><b-icon-search></b-icon-search></span>
                         </div>
@@ -21,7 +21,7 @@
                     
             <div class="row mt-5">
                 <div class="col-md-4 p-2" v-for="datamovie in setMovie" :key="datamovie.imdbID">
-                <CardMovie :sendMovie="datamovie" />
+                    <CardMovie :sendMovie="datamovie" />
                 </div>
             </div>
 
@@ -50,10 +50,11 @@
 
         methods: {
             searchMovie() {
-                // axios.get('http://127.0.0.1:8000/api/v1/post/search-data/'+this.searchKey)
                 let key = "6b010a5a";
+                console.log(this.searchKey);
                 axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=" + this.searchKey)
                 .then((response) => {
+                    console.log(response.data);
                     this.setMovie = response.data;
                 } )
                 .catch((error) => console.log("Gagal: ", error));
@@ -61,10 +62,12 @@
         },
 
         mounted() {
-            let id = "tt3896198";
+            // let id = "tt3896198";
+            // let type = "movies";
             let key = "6b010a5a";
-            axios.get("http://www.omdbapi.com/?apikey="+ key +"&i=" + id)
+            axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=inception")
             .then((response) => {
+                console.log(response.data);
                 this.setMovie = response.data;
             } )
             .catch((error) => console.log("Gagal: ", error));
