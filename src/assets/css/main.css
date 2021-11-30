@@ -1,0 +1,40 @@
+#app {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-success {
+    background-color: #4eb883;
+    color: #fff;
+}
+.btn-primary {
+    background-color: #0275d8;
+    color: #fff;
+}
+.btn-warning {
+    background-color: #f0ad4e;
+    color: #000;
+}
+.btn-danger {
+    background-color: #d9534f;
+    color: #fff;
+}
+.btn-info {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+.text-success {
+    color: #4eb883;
+}
+.text-primary {
+    color: #0275d8;
+}
+.text-warning {
+    color: #f0ad4e;
+}
+.text-danger {
+    color: #d9534f;
+}
+.text-info {
+    color: #5bc0de;
+}
