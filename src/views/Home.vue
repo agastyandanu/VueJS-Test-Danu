@@ -23,13 +23,14 @@
           </div>
         </div>
       </div>
+      
     </div>
 
-    <b-modal id="modalDetail" hide-footer>
+    <b-modal id="modalDetail" size="lg" hide-footer>
         <div class="d-block text-center">
             <img :src="imageData.poster" alt="">
         </div>
-        <b-button class="mt-3" block @click="$bvModal.hide('modalDetail')">Close Me</b-button>
+        <!-- <b-button class="mt-3" block @click="$bvModal.hide('modalDetail')">Close Me</b-button> -->
     </b-modal>
 
   </div>

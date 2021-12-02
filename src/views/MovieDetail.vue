@@ -66,7 +66,7 @@
             <p class="text-left">{{ setMovie.Plot }}</p>
         </div>
 
-        <div class="row my-4">
+        <!-- <div class="row my-4">
             <div class="col-md-6 offset-md-6">
                 <div class="row">
                     <div class="col-6">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
       </div>
   </div>
