@@ -10,7 +10,8 @@
                     <div class="justify-content-center align-self-center">
                         <h2><strong>Unlimited Movies</strong> <br> from Your Gadget</h2>
                         <p>Wherever and whenever You Are</p>
-                        <router-link to="/movie-list" class="btn btn-lg btn-success">Get Started <b-icon-arrow-right></b-icon-arrow-right> </router-link>
+                        <router-link to="/movie-list" class="btn btn-lg btn-primary">Get Started <b-icon-arrow-right></b-icon-arrow-right> </router-link>
+                        <br><br>
                     </div>
                 </div>            
             </div>
@@ -25,9 +26,14 @@
 </template>
 
 <script>
-export default {
-    name : 'Hero'
-}
+    export default {
+        name : 'Hero',
+
+        methods: {
+
+        }
+    }
+
 </script>
 
 <style>

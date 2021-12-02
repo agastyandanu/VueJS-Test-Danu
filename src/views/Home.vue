@@ -11,12 +11,27 @@
       </div>
 
       <div class="row mt-5">
-        <div class="col-md-4 p-2" v-for="datamovie in setMovie" :key="datamovie.imdbID">
-          <CardMovie :sendMovie="datamovie" />
+        <div class="col-md-6 col-lg-4 p-2" v-for="datamovie in setMovie" :key="datamovie.imdbID">
+          <div class="card p-2">
+              <img class="card-img-top" v-b-modal="'modalDetail'" :src="datamovie.Poster" alt="Card image cap" @click="showImage(datamovie)">
+              <div class="card-body">
+                  <h5 class="card-title text-center"> {{datamovie.Title}} ({{ datamovie.Year}}) </h5>
+                  <router-link :to="{name: 'MovieDetail', params: {id: datamovie.imdbID} }">
+                      <button variant="outline-primary" class="btn btn-outline-primary btn-block mt-2">Detail</button>                
+                  </router-link> 
+              </div>
+          </div>
         </div>
       </div>
-
     </div>
+
+    <b-modal id="modalDetail" hide-footer>
+        <div class="d-block text-center">
+            <img :src="imageData.poster" alt="">
+        </div>
+        <b-button class="mt-3" block @click="$bvModal.hide('modalDetail')">Close Me</b-button>
+    </b-modal>
+
   </div>
 </template>
 
@@ -25,36 +40,43 @@
 import axios from 'axios';
 import Navbar from '@/components/template/Navbar.vue'
 import Hero from '@/components/template/Hero.vue'
-import CardMovie from '@/components/CardMovie.vue'
 
 export default {
   name: 'Home',
   components: {
     Navbar,
-    Hero,
-    CardMovie
+    Hero
   },
 
   data() {
     return {
-      setMovie : []
+      setMovie : [],
+      imageData : {
+        poster: ''
+      }
     }
   },
 
   methods: {
+    showImage(datamovie) {
+        this.imageData.poster = datamovie.Poster;
+    }
   },
 
   mounted() {
-    let id = "tt3896198";
-    // let type = "movies";
     let key = "6b010a5a";
-    axios.get("http://www.omdbapi.com/?apikey="+ key +"&i=" + id)
-    .then((response) => {
-      this.setMovie = response;
-      console.log(response.data.Title);
-    } )
+    let search = "harry";
+    axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=" + search)
+    .then((result) => {
+      if (result.data.Response == "True") {
+        this.setMovie = result.data.Search;
+      } else {
+          alert("Something Went Wrong");
+      }      
+    }) 
     .catch((error) => console.log("Gagal: ", error));
   }
+  
 }
 
 </script>

@@ -9,18 +9,13 @@
             </div>
 
             <div class="row mt-5">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <input v-model="searchKey" type="text" class="form-control" placeholder="Search Movies" @keyup="searchMovie">
-                        <div class="input-group-append">
-                            <span class="input-group-text" id="basic-addon2"><b-icon-search></b-icon-search></span>
-                        </div>
-                    </div>
+                <div class="col-md-6 m-auto">
+                    <input v-model="searchKey" @keyup="searchMovie" placeholder="Search Movies" type="text" class="form-control text-right">
                 </div>
             </div>
                     
             <div class="row mt-5">
-                <div class="col-md-4 p-2" v-for="datamovie in setMovie" :key="datamovie.imdbID">
+                <div class="col-md-3 p-2" v-for="datamovie in setMovie" :key="datamovie.imdbID">
                     <CardMovie :sendMovie="datamovie" />
                 </div>
             </div>
@@ -50,26 +45,32 @@
 
         methods: {
             searchMovie() {
-                let key = "6b010a5a";
-                console.log(this.searchKey);
-                axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=" + this.searchKey)
-                .then((response) => {
-                    console.log(response.data);
-                    this.setMovie = response.data;
-                } )
+                const key = "6b010a5a";
+                const search = this.searchKey;
+                axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=" + search)
+                .then((result) => {
+                    if (result.data.Response == "True") {
+                        this.setMovie = result.data.Search;
+                    } else {
+                        // alert("Something Went Wrong");
+                    }
+                })
                 .catch((error) => console.log("Gagal: ", error));
             }
         },
 
         mounted() {
-            // let id = "tt3896198";
-            // let type = "movies";
-            let key = "6b010a5a";
-            axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=inception")
-            .then((response) => {
-                console.log(response.data);
-                this.setMovie = response.data;
-            } )
+            const key = "6b010a5a";
+            const search = "harry";
+            axios.get("http://www.omdbapi.com/?apikey="+ key +"&s=" + search)
+            .then((result) => {
+                if (result.data.Response == "True") {
+                    this.setMovie = result.data.Search;
+                } else {
+                    // alert("Something Went Wrong");
+                    this.setMovie = "Movie Not Found";
+                }      
+            }) 
             .catch((error) => console.log("Gagal: ", error));
         }
 

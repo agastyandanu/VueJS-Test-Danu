@@ -4,14 +4,14 @@
       <Navbar />
       <div class="container">
 
-        <div class="row">
+        <div class="row mt-4">
             <h2 class="mb-5">Movie Detail</h2>
-            <div class="col-md-5">
-                <img :src="setMovie.Poster" alt="" class="img-fluid">
+            <div class="col-md-5 text-center">
+                <img :src="setMovie.Poster" @click="imageModal()" alt="" class="img-fluid">
             </div>
             <div class="col-md-7">
                 <h2>{{ setMovie.Title }}</h2>
-                <table class="table table-borderless mt-3" style="text-align: left">
+                <table class="table table-borderless mt-3">
                     <tr>
                         <th class="py-2">Genre</th>
                         <td class="px-2">:</td>
@@ -53,11 +53,29 @@
                         <td>{{ setMovie.Awards }}</td>
                     </tr>
                     <tr>
-                        <th class="py-2">Plot</th>
+                        <th class="py-2">IMDB Ratings</th>
                         <td class="px-2">:</td>
-                        <td>{{ setMovie.Plot }}</td>
+                        <td>{{ setMovie.imdbRating }}</td>
                     </tr>
                 </table>
+            </div>
+        </div>
+        
+        <div class="row my-4">
+            <h5>Synopsis</h5>
+            <p class="text-left">{{ setMovie.Plot }}</p>
+        </div>
+
+        <div class="row my-4">
+            <div class="col-md-6 offset-md-6">
+                <div class="row">
+                    <div class="col-6">
+                        <router-link to="/" class="btn btn-outline-danger btn-block">Back</router-link>
+                    </div>
+                    <div class="col-6">
+                        <router-link to="/" class="btn btn-outline-primary btn-block">Download</router-link>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -83,16 +101,18 @@
         },
 
         methods: {
+            imageModal() {
+                alert("Show Modal Image");
+            }
         },
 
         mounted() {
-            // let id = this.$route.params.id;
-            let id = "tt3896198";
-            console.log(id);
+            let id = this.$route.params.id;
             let key = "6b010a5a";
             axios.get("http://www.omdbapi.com/?apikey="+ key +"&i=" + id)
             .then((response) => {
                 this.setMovie = response.data;
+                console.log(this.setMovie);
             } )
             .catch((error) => console.log("Gagal: ", error));
         }
